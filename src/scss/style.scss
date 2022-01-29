@@ -7,8 +7,71 @@
         3, [col-start] minmax(min-content, 500px) [col-end]
       )
       [center-end] 1fr [container-end];
+
+      @media screen and (min-width: 2000px) {
+        display: grid;
+        grid-template-columns:
+          [container-start] 1fr [center-start] repeat(
+            3, [col-start] minmax(min-content, 650px) [col-end]
+          )
+          [center-end] 1fr [container-end];
+      }
 }
 
+@mixin image-positioning {
+  object-fit: cover;
+  object-position: center;
+  
+}
+
+@mixin button($color) {
+  background-color: map-get($colors, collor-quinary);
+                color: white;
+                padding: 15px 25px 15px 25px;
+                margin-top: 20px;
+                position: relative;
+                border: none;
+                cursor: pointer;
+
+                &::before,
+                &::after {
+                    position: absolute;
+                    content: "";
+                    background-color: transparent;
+                    z-index: 2;
+                }
+
+                &.hover::before,
+                &.hover::after {
+                    width: 10%; 
+                    height: 25%;
+                    transition: 0.35s;
+                }
+
+                &.hover::before {
+                    margin: -5px;
+                    top: 0; left: 0;
+                    border-left: 1px solid $color;
+                    border-top: 1px solid $color;
+                  }
+
+                  &.hover::after {
+                    bottom: 0; right: 0;
+                    border-right: 1px solid $color;
+                    border-bottom: 1px solid $color;
+                    margin: -5px;
+                  }
+
+                &.hover:hover::before,
+                &.hover:hover::after,
+                &.hover:active::before,
+                &.hover:active::after {
+                    width: 106%;
+                    height: 120%;
+                  }
+}
+
+//####################################  NAVBAR SECTION ####################################//
 .navbar {
     @extend%grid-column;
 
@@ -106,6 +169,7 @@
     }
 }
 
+//####################################  HEADER SECTION ####################################//
 .header {
     @extend%grid-column;
     background: linear-gradient(0deg, rgba(210,208,204,0.7987570028011204) 0%, rgba(27,28,21,0.804359243697479) 0%),url("https://i.ibb.co/tB0WqCV/barber-shop-g9edce81db-1920.jpg");
@@ -126,7 +190,6 @@
             flex-direction: column;
             align-items: flex-end;
             margin-right: 15px;
-            // margin-top: calc(100px + 2.5vw);
            
             &--text-one {
                 font-size: map-get($font-sizes, font-size-regular)
@@ -136,54 +199,8 @@
                 font-size: map-get($font-sizes, font-size-large);
                 text-align: right;
             }
-
             &--button {
-                background-color: map-get($colors, collor-button);
-                color: white;
-                padding: 15px 25px 15px 25px;
-                margin-top: 20px;
-                position: relative;
-                border: none;
-                cursor: pointer;
-
-                &::before,
-                &::after {
-                    outline: 0!important;
-                    outline-offset: 0;
-                    position: absolute;
-                    content: "";
-                    background-color: transparent;
-                    z-index: 2;
-                }
-
-                &.hover::before,
-                &.hover::after {
-                    width: 10%; 
-                    height: 25%;
-                    transition: 0.35s;
-                }
-
-                &.hover::before {
-                    margin: -5px;
-                    top: 0; left: 0;
-                    border-left: 1px solid #ffffff;
-                    border-top: 1px solid #ffffff;
-                  }
-
-                  &.hover::after {
-                    bottom: 0; right: 0;
-                    border-right: 1px solid #ffffff;;
-                    border-bottom: 1px solid #ffffff;
-                    margin: -5px;
-                  }
-
-                &.hover:hover::before,
-                &.hover:hover::after,
-                &.hover:active::before,
-                &.hover:active::after {
-                    width: 106%;
-                    height: 120%;
-                  }
+                @include button(#ffffff);
                 
             }
         }
@@ -218,16 +235,301 @@
 
 }
 
+//####################################  SHOWCASE SECTION ####################################//
 .showcase {
     @extend%grid-column;
     background-color: map-get($colors, color-secondary);
     
-    
     &__content {
         grid-column: center-start / center-end;
+        display: flex;
+        padding: 50px 30px;
+        justify-content: center;
+        min-height: 500px;
         
-        height: 500px;
+        &__left-side {
+          margin-top: 30px;
+          width: 40%;
+          h5 {
+            color: map-get($colors, collor-quinary);
+            font-size: map-get($font-sizes, font-size-regular);
+          }
+          
+          h3 {
+            font-size: map-get($font-sizes, font-size-medium);
+            margin-top: 20px;
+          }
+
+          p {
+            font-size: map-get($font-sizes, font-size-small);
+            word-wrap: break-word;
+            margin: 30px 0px;
+            line-height: 1.6;
+  
+          }
+
+          div {
+            border-bottom: 1px solid map-get($colors, collor-quinary);
+            width: 20%;
+            padding-top: 20px
+            
+          }
+          &--button {
+            @include button(#1a1a1a);
+          }
+        }
+        &__image {
+          padding: 0 30px;
+          width: 40%;
+          img {
+            width: 100%;
+            height: 100%;
+            min-width: 35%;
+            filter: grayscale(100%);
+            object-position: center;
+            object-fit: cover;
+            
+          }    
+        }
+
+        &__right-side {
+          margin-top: 30px;
+   
+
+          h5 {
+            color: map-get($colors, collor-quinary);
+            font-size: map-get($font-sizes, font-size-regular);
+            word-break: keep-all;
+          }
+          
+          h3 {
+            font-size: map-get($font-sizes, font-size-medium);
+            margin-top: 20px;
+          }
+
+          p {
+            padding-top: 20px;
+            font-size: map-get($font-sizes, font-size-small);
+            line-height: 1.6;
+
+          }
+
+          div {
+            border-bottom: 1px solid map-get($colors, collor-quinary);
+            width: 40%;
+            margin: 20px 0px;
+            
+          }
+        }
+
+        @media screen and (max-width: 920px) {
+          & {
+            display: grid;
+            grid-template-rows: repeat(2, minmax(min-content, 500px));
+            
+            &__left-side {
+              grid-row: 1 / 2;
+              width: auto;
+              padding-right: 15px;
+            }
+
+            &__right-side {
+              grid-row: 1 / 2;
+              padding-left: 15px;
+            }
+
+            &__image {
+            justify-items: center;
+            grid-row: 2 / 3;
+            grid-column: 1 / 3;
+            padding-top: 20px;
+            width: 100%; 
+            
+          
+            }
+            
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          &{
+            display: grid;
+            grid-template-rows: repeat(3, minmax(min-content, max-content));
+            
+            &__left-side {
+              grid-row: 1 / 2;
+          
+            }
+
+            &__right-side {
+              padding: 30px 0;
+              grid-row: 2 / 3;
+              height: max-content;
+              text-align: center;
+
+              div {
+                margin-left: 30%;
+              }
+              
+            }
+
+            &__image {
+            justify-items: center;
+            grid-row: 3 / 4;
+          
+     
+            width: 100%; 
+            
+          
+            }
+
+          }
+        }
     }
    
 
+}
+
+//####################################  GALLERY SECTION ####################################//
+.gallery {
+  @extend%grid-column;
+
+  &__container {
+    margin-top: 50px;
+    grid-column: center-start / center-end;
+    &--title {
+      text-align: center;
+      margin-bottom: 30px;
+      h5 {
+        color: map-get($colors,collor-quinary);
+        font-size: map-get($font-sizes, font-size-regular);
+        font-weight: map-get($font-weights, font-weight-regular);
+      }
+
+      h2 {
+        font-size: map-get($font-sizes, font-size-medium);
+        font-weight: map-get($font-weights, font-weight-bold);
+      }
+
+    }
+    &__pictures {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      &--row-one, &--row-two, &--row-three {
+        display: flex;
+        align-items: center;    
+        flex-direction: column;
+        
+      } 
+
+      .picture-one, .picture-two, .picture-five, .picture-six {
+        @include image-positioning ;     
+        padding-bottom: 10px;
+        flex-grow: 1;
+        max-height: 350px;
+        width: 300px;
+
+        @media screen and (max-width: 650px) {
+          width: 100%;
+        }
+
+      }
+
+      .picture-three, .picture-four {
+        @include image-positioning ;   
+        padding-bottom: 10px;
+        flex-grow: 1;
+        max-height: 500px;
+        width: 350px;
+
+        @media screen and (max-width: 650px) {
+          width: 225%;
+          max-height: 350px;
+        }
+        @media screen and (max-width: 510px) {
+          width: 100%;
+          max-height: 350px;
+        }
+
+      }
+     
+    }
+
+  }
+}
+
+//####################################  ABOUT SECTION ####################################//
+.about {
+  @extend%grid-column;
+  background-color: map-get($colors, color-secondary);
+  &__container {
+    grid-column: center-start / center-end;
+    padding: 70px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &__title {
+      text-align: center;
+      font-family: 'Arial';
+      h5 {
+        color: map-get($colors, collor-quinary);
+        font-size: map-get($font-sizes, font-size-regular);
+        font-weight: map-get($font-weights, font-weight-regular)
+      }
+
+      h2 {
+        padding-top: 20px;
+        font-size: map-get($font-sizes, font-size-medium);
+      }
+    }
+
+    &__content {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    line-height: 1.6;
+    font-weight: map-get($font-weights, font-weight-light);
+      &--page-one {
+        font-size: map-get($font-sizes, font-size-small);
+        width: 50%;
+        padding-right: 15px;
+
+        @media screen and (max-width: 450px) {
+        width: 100%; 
+        padding: 0 15px; 
+        }
+      }
+
+      &--page-two {
+        font-size: map-get($font-sizes, font-size-small);
+        width: 50%;
+        padding-left: 15px;
+
+        @media screen and (max-width: 450px) {
+          width: 100%;  
+          padding: 0 15px;
+          }
+ 
+      }
+
+      @media screen and (max-width: 450px) {
+        display: block; 
+        }
+    }
+    &__button {
+      @include button(#1a1a1a);
+    }
+  }
+}
+
+//####################################  BARBERS SECTION ####################################//
+.barbers {
+  @extend%grid-column;
+  background-color: map-get($colors, color-tertiary);
+  &__container {
+    grid-column: center-start / center-end;
+  }
 }

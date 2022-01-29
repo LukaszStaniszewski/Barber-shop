@@ -11,7 +11,7 @@ $colors: (
   "color-secondary": #f8fbf6,
   "color-tertiary": #d7dbd6,
   "color-quaternary": #1a1a1a,
-  "collor-button": #ae7b5b
+  "collor-quinary": #ae7b5b
 );
 
 $font-weights: (
@@ -24,8 +24,8 @@ $font-weights: (
 );
 
 $font-sizes: (
-  "font-size-small": calc(1.2rem + 0.5vw),
-  "font-size-regular": calc(1.5rem + 1vw),
+  "font-size-small": calc(1.2rem + 0.35vw),
+  "font-size-regular": calc(1.5rem + 0.9vw),
   "font-size-medium": calc(1.5rem + 1.5vw),
   "font-size-large": calc(1.5rem + 2.5vw),
 );
