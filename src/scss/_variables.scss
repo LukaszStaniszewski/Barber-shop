@@ -1,0 +1,31 @@
+// html {
+//     --color-primary: #ffffff;
+//     --color-secondary: #f8fbf6;
+//     --color-tertiary: #d7dbd6;
+//     --color-quaternary: #1a1a1a
+//   },
+
+
+$colors: (
+  "color-primary": #ffffff,
+  "color-secondary": #f8fbf6,
+  "color-tertiary": #d7dbd6,
+  "color-quaternary": #1a1a1a,
+  "collor-button": #ae7b5b
+);
+
+$font-weights: (
+  "font-weight-thin": 100,
+  "font-weight-light": 300,
+  "font-weight-regular": 400,
+  "font-weight-medium": 500,
+  "font-weight-bold": 700,
+  "font-weight-black": 900,
+);
+
+$font-sizes: (
+  "font-size-small": calc(1.2rem + 0.5vw),
+  "font-size-regular": calc(1.5rem + 1vw),
+  "font-size-medium": calc(1.5rem + 1.5vw),
+  "font-size-large": calc(1.5rem + 2.5vw),
+);

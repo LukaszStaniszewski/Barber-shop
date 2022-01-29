@@ -1,0 +1,233 @@
+@use "./index" as *;
+
+%grid-column {
+    display: grid;
+    grid-template-columns:
+      [container-start] 1fr [center-start] repeat(
+        3, [col-start] minmax(min-content, 500px) [col-end]
+      )
+      [center-end] 1fr [container-end];
+}
+
+.navbar {
+    @extend%grid-column;
+
+    &__container {
+        grid-column: center-start / center-end;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 15px;
+
+        &--name{
+            font-size: map-get($font-sizes, font-size-regular);
+            vertical-align: middle;
+        }
+
+        &__hamburger {
+            width: 60px;
+            height: 45px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+            cursor: pointer;
+           
+            span {
+                display: block;
+                position: absolute;
+                height: 6px;
+                width: 50%;
+                background: map-get($colors, color-quaternary);
+                opacity: 1;
+                transform: rotate(0deg);
+                transition: .25s ease-in-out;
+            }
+
+            span:nth-child(even) {
+                left: 50%;
+                border-radius: 0 9px 9px 0;
+              }
+              
+              span:nth-child(odd) {
+                left:0px;
+                border-radius: 9px 0 0 9px;
+              }
+              
+              span:nth-child(1), span:nth-child(2) {
+                top: 0px;
+              }
+              
+              span:nth-child(3), span:nth-child(4) {
+                top: 18px;
+              }
+              
+              span:nth-child(5),  span:nth-child(6) {
+                top: 36px;
+              }
+              
+              &.open span:nth-child(1), &.open span:nth-child(6) {
+                transform: rotate(45deg);
+              }
+              
+              &.open span:nth-child(2), &.open span:nth-child(5) {
+                transform: rotate(-45deg);
+              }
+              
+              &.open span:nth-child(1) {
+                left: 5px;
+                top: 7px;
+              }
+              
+              &.open span:nth-child(2) {
+                left: calc(50% - 5px);
+                top: 7px;
+              }
+              
+              &.open span:nth-child(3) {
+                left: -50%;
+                opacity: 0;
+              }
+              
+              &.open span:nth-child(4) {
+                left: 100%;
+                opacity: 0;
+              }
+              
+              &.open span:nth-child(5) {
+                left: 5px;
+                top: 29px;
+              }
+              
+              &.open span:nth-child(6) {
+                left: calc(50% - 5px);
+                top: 29px;
+              }
+        }
+    }
+}
+
+.header {
+    @extend%grid-column;
+    background: linear-gradient(0deg, rgba(210,208,204,0.7987570028011204) 0%, rgba(27,28,21,0.804359243697479) 0%),url("https://i.ibb.co/tB0WqCV/barber-shop-g9edce81db-1920.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 700px;
+    &__content{
+        grid-column: center-start / center-end;
+        color: white;
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+        &__right-side {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-right: 15px;
+            // margin-top: calc(100px + 2.5vw);
+           
+            &--text-one {
+                font-size: map-get($font-sizes, font-size-regular)
+            }
+
+            &--welcome-text {
+                font-size: map-get($font-sizes, font-size-large);
+                text-align: right;
+            }
+
+            &--button {
+                background-color: map-get($colors, collor-button);
+                color: white;
+                padding: 15px 25px 15px 25px;
+                margin-top: 20px;
+                position: relative;
+                border: none;
+                cursor: pointer;
+
+                &::before,
+                &::after {
+                    outline: 0!important;
+                    outline-offset: 0;
+                    position: absolute;
+                    content: "";
+                    background-color: transparent;
+                    z-index: 2;
+                }
+
+                &.hover::before,
+                &.hover::after {
+                    width: 10%; 
+                    height: 25%;
+                    transition: 0.35s;
+                }
+
+                &.hover::before {
+                    margin: -5px;
+                    top: 0; left: 0;
+                    border-left: 1px solid #ffffff;
+                    border-top: 1px solid #ffffff;
+                  }
+
+                  &.hover::after {
+                    bottom: 0; right: 0;
+                    border-right: 1px solid #ffffff;;
+                    border-bottom: 1px solid #ffffff;
+                    margin: -5px;
+                  }
+
+                &.hover:hover::before,
+                &.hover:hover::after,
+                &.hover:active::before,
+                &.hover:active::after {
+                    width: 106%;
+                    height: 120%;
+                  }
+                
+            }
+        }
+        &__left-side {
+            display: flex;
+            flex-direction: column;
+            justify-items: flex-end;
+            font-size: map-get($font-sizes, font-size-small);
+            width: min-content;
+            text-align: center;
+            margin-left: 15px;
+
+            &--barber {
+                font-size: map-get($font-sizes, font-size-medium);
+                width: min-content;
+                &::after,
+                &::before {
+                   
+                    display: block;
+                    content: '';
+                    background-color: white;
+                    width: 100%;
+                    height: 3px
+                    
+                }
+            }
+        }
+        
+       
+    }
+    
+
+}
+
+.showcase {
+    @extend%grid-column;
+    background-color: map-get($colors, color-secondary);
+    
+    
+    &__content {
+        grid-column: center-start / center-end;
+        
+        height: 500px;
+    }
+   
+
+}
