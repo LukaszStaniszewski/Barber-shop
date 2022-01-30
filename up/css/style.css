@@ -24,17 +24,23 @@ a:visited {
   text-decoration: none;
 }
 
-.barbers, .about, .gallery, .showcase, .header, .navbar {
+.testimonials, .barbers, .about, .gallery, .showcase, .header, .navbar {
   display: grid;
   grid-template-columns: [container-start] 1fr [center-start] repeat(3, [col-start] minmax(min-content, 500px) [col-end]) [center-end] 1fr [container-end];
 }
 @media screen and (min-width: 2000px) {
-  .barbers, .about, .gallery, .showcase, .header, .navbar {
+  .testimonials, .barbers, .about, .gallery, .showcase, .header, .navbar {
     display: grid;
     grid-template-columns: [container-start] 1fr [center-start] repeat(3, [col-start] minmax(min-content, 650px) [col-end]) [center-end] 1fr [container-end];
   }
 }
 
+.navbar {
+  background-color: #ffffff;
+  position: fixed;
+  z-index: 3;
+  opacity: 0.9;
+}
 .navbar__container {
   grid-column: center-start/center-end;
   display: flex;
@@ -43,7 +49,7 @@ a:visited {
   margin: 10px 15px;
 }
 .navbar__container--name {
-  font-size: calc(1.5rem + 0.9vw);
+  font-size: calc(1.4rem + 0.8vw);
   vertical-align: middle;
 }
 .navbar__container__hamburger {
@@ -135,7 +141,7 @@ a:visited {
   margin-right: 15px;
 }
 .header__content__right-side--text-one {
-  font-size: calc(1.5rem + 0.9vw);
+  font-size: calc(1.4rem + 0.8vw);
 }
 .header__content__right-side--welcome-text {
   font-size: calc(1.5rem + 2.5vw);
@@ -216,7 +222,8 @@ a:visited {
 }
 .showcase__content__left-side h5 {
   color: #ae7b5b;
-  font-size: calc(1.5rem + 0.9vw);
+  font-size: calc(1.4rem + 0.8vw);
+  font-weight: 300;
 }
 .showcase__content__left-side h3 {
   font-size: calc(1.5rem + 1.5vw);
@@ -288,8 +295,8 @@ a:visited {
 }
 .showcase__content__right-side h5 {
   color: #ae7b5b;
-  font-size: calc(1.5rem + 0.9vw);
-  word-break: keep-all;
+  font-size: calc(1.4rem + 0.8vw);
+  font-weight: 300;
 }
 .showcase__content__right-side h3 {
   font-size: calc(1.5rem + 1.5vw);
@@ -352,7 +359,7 @@ a:visited {
 }
 
 .gallery__container {
-  margin-top: 50px;
+  margin: 50px 0;
   grid-column: center-start/center-end;
 }
 .gallery__container--title {
@@ -361,8 +368,8 @@ a:visited {
 }
 .gallery__container--title h5 {
   color: #ae7b5b;
-  font-size: calc(1.5rem + 0.9vw);
-  font-weight: 400;
+  font-size: calc(1.4rem + 0.8vw);
+  font-weight: 300;
 }
 .gallery__container--title h2 {
   font-size: calc(1.5rem + 1.5vw);
@@ -371,45 +378,26 @@ a:visited {
 .gallery__container__pictures {
   display: flex;
   justify-content: space-evenly;
-  flex-wrap: wrap;
 }
 .gallery__container__pictures--row-one, .gallery__container__pictures--row-two, .gallery__container__pictures--row-three {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 30%;
 }
 .gallery__container__pictures .picture-one, .gallery__container__pictures .picture-two, .gallery__container__pictures .picture-five, .gallery__container__pictures .picture-six {
   object-fit: cover;
   object-position: center;
   padding-bottom: 10px;
-  flex-grow: 1;
   max-height: 350px;
-  width: 300px;
-}
-@media screen and (max-width: 650px) {
-  .gallery__container__pictures .picture-one, .gallery__container__pictures .picture-two, .gallery__container__pictures .picture-five, .gallery__container__pictures .picture-six {
-    width: 100%;
-  }
+  width: 100%;
 }
 .gallery__container__pictures .picture-three, .gallery__container__pictures .picture-four {
   object-fit: cover;
   object-position: center;
   padding-bottom: 10px;
-  flex-grow: 1;
   max-height: 500px;
-  width: 350px;
-}
-@media screen and (max-width: 650px) {
-  .gallery__container__pictures .picture-three, .gallery__container__pictures .picture-four {
-    width: 225%;
-    max-height: 350px;
-  }
-}
-@media screen and (max-width: 510px) {
-  .gallery__container__pictures .picture-three, .gallery__container__pictures .picture-four {
-    width: 100%;
-    max-height: 350px;
-  }
+  width: 100%;
 }
 
 .about {
@@ -428,7 +416,7 @@ a:visited {
 }
 .about__container__title h5 {
   color: #ae7b5b;
-  font-size: calc(1.5rem + 0.9vw);
+  font-size: calc(1.4rem + 0.8vw);
   font-weight: 400;
 }
 .about__container__title h2 {
@@ -447,7 +435,7 @@ a:visited {
   width: 50%;
   padding-right: 15px;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
   .about__container__content--page-one {
     width: 100%;
     padding: 0 15px;
@@ -458,13 +446,13 @@ a:visited {
   width: 50%;
   padding-left: 15px;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
   .about__container__content--page-two {
     width: 100%;
     padding: 0 15px;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
   .about__container__content {
     display: block;
   }
@@ -513,6 +501,154 @@ a:visited {
 }
 .barbers__container {
   grid-column: center-start/center-end;
+  margin: 40px 6vw;
+}
+.barbers__container__title {
+  text-align: center;
+}
+.barbers__container__title h5 {
+  color: #ae7b5b;
+  font-size: calc(1.4rem + 0.8vw);
+  font-weight: 300;
+}
+.barbers__container__title h3 {
+  font-size: calc(1.5rem + 1.5vw);
+  padding: 20px 0;
+}
+.barbers__container__frame {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.barbers__container__frame--image-frame {
+  padding: 30px;
+  background-color: #ffffff;
+  width: 30%;
+}
+.barbers__container__frame--image-frame img {
+  object-fit: cover;
+  object-position: center;
+  height: 350px;
+  width: 100%;
+}
+.barbers__container__frame--image-frame h5 {
+  color: #ae7b5b;
+  font-size: calc(1.2rem + 0.35vw);
+  font-weight: 300;
+  padding: 10px 0;
+}
+.barbers__container__frame--image-frame h4 {
+  font-size: calc(1.4rem + 0.8vw);
+  font-weight: 400;
+}
+@media screen and (max-width: 900px) {
+  .barbers__container__frame {
+    flex-direction: column;
+  }
+  .barbers__container__frame--image-frame {
+    width: 100%;
+    margin-top: 30px;
+  }
+}
+
+.testimonials {
+  background: linear-gradient(0deg, rgba(210, 208, 204, 0.7987570028) 0%, rgba(27, 28, 21, 0.8043592437) 0%), url("https://i.ibb.co/vBj175p/barber-1979440.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.testimonials__container {
+  grid-column: center-start/center-end;
+  text-align: center;
+  margin: 50px 30px;
+}
+.testimonials__container h2 {
+  font-size: calc(1.5rem + 1.5vw);
+  font-weight: 400;
+  color: #ffffff;
+}
+.testimonials__container__frame {
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  margin-top: 30px;
+}
+.testimonials__container__frame--inner {
+  width: 40%;
+  padding: 30px;
+  margin: 20px;
+  border: 1px solid white;
+}
+.testimonials__container__frame--inner img {
+  width: 30px;
+  height: 30px;
+  margin: 20px 0;
+  filter: brightness(0) invert(1);
+}
+.testimonials__container__frame--inner p {
+  font-family: "Arial";
+  line-height: 1.5;
+  font-size: calc(1.2rem + 0.35vw);
+  font-weight: 300;
+  color: white;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.testimonials__container__frame--inner h5 {
+  text-align: left;
+  font-size: calc(1.4rem + 0.8vw);
+  font-weight: 400;
+  color: #ae7b5b;
+}
+@media screen and (max-width: 650px) {
+  .testimonials__container__frame {
+    flex-direction: column;
+  }
+  .testimonials__container__frame--inner {
+    width: 90%;
+  }
+}
+
+.footer {
+  padding: 40px 30px 20px 30px;
+  background-color: #1a1a1a;
+}
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer__container__logo {
+  font-size: calc(1.2rem + 0.35vw);
+  color: #ae7b5b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer__container__logo--barber {
+  font-size: calc(1.5rem + 1.5vw);
+}
+.footer__container__logo--barber::after, .footer__container__logo--barber::before {
+  display: block;
+  content: "";
+  background-color: #ae7b5b;
+  height: 3px;
+}
+.footer__container__icons {
+  margin-top: 40px;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+}
+.footer__container__icons img {
+  padding: 0 20px;
+  filter: brightness(0) invert(1);
+  transition: filter 10s ease-in-out;
+}
+.footer__container__icons img:hover, .footer__container__icons img:active {
+  filter: invert(70%) sepia(5%) saturate(5631%) hue-rotate(331deg) brightness(78%) contrast(65%);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

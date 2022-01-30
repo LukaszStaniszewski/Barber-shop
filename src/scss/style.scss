@@ -74,7 +74,10 @@
 //####################################  NAVBAR SECTION ####################################//
 .navbar {
     @extend%grid-column;
-
+    background-color: map-get($colors, color-primary);
+    position: fixed;
+    z-index: 3;
+    opacity: 0.9;
     &__container {
         grid-column: center-start / center-end;
         display: flex;
@@ -167,6 +170,7 @@
               }
         }
     }
+
 }
 
 //####################################  HEADER SECTION ####################################//
@@ -253,6 +257,7 @@
           h5 {
             color: map-get($colors, collor-quinary);
             font-size: map-get($font-sizes, font-size-regular);
+            font-weight: map-get($font-weights, font-weight-light)
           }
           
           h3 {
@@ -299,7 +304,8 @@
           h5 {
             color: map-get($colors, collor-quinary);
             font-size: map-get($font-sizes, font-size-regular);
-            word-break: keep-all;
+            font-weight: map-get($font-weights, font-weight-light);
+            
           }
           
           h3 {
@@ -395,7 +401,7 @@
   @extend%grid-column;
 
   &__container {
-    margin-top: 50px;
+    margin: 50px 0;
     grid-column: center-start / center-end;
     &--title {
       text-align: center;
@@ -403,7 +409,7 @@
       h5 {
         color: map-get($colors,collor-quinary);
         font-size: map-get($font-sizes, font-size-regular);
-        font-weight: map-get($font-weights, font-weight-regular);
+        font-weight: map-get($font-weights, font-weight-light);
       }
 
       h2 {
@@ -415,43 +421,27 @@
     &__pictures {
       display: flex;
       justify-content: space-evenly;
-      flex-wrap: wrap;
 
       &--row-one, &--row-two, &--row-three {
         display: flex;
         align-items: center;    
-        flex-direction: column;
-        
-      } 
+        flex-direction: column;    
+        width: 30%;
+      }
 
       .picture-one, .picture-two, .picture-five, .picture-six {
         @include image-positioning ;     
         padding-bottom: 10px;
-        flex-grow: 1;
         max-height: 350px;
-        width: 300px;
-
-        @media screen and (max-width: 650px) {
-          width: 100%;
-        }
+        width: 100%;
 
       }
 
       .picture-three, .picture-four {
         @include image-positioning ;   
         padding-bottom: 10px;
-        flex-grow: 1;
         max-height: 500px;
-        width: 350px;
-
-        @media screen and (max-width: 650px) {
-          width: 225%;
-          max-height: 350px;
-        }
-        @media screen and (max-width: 510px) {
-          width: 100%;
-          max-height: 350px;
-        }
+        width: 100%;
 
       }
      
@@ -497,7 +487,7 @@
         width: 50%;
         padding-right: 15px;
 
-        @media screen and (max-width: 450px) {
+        @media screen and (max-width:500px) {
         width: 100%; 
         padding: 0 15px; 
         }
@@ -508,14 +498,14 @@
         width: 50%;
         padding-left: 15px;
 
-        @media screen and (max-width: 450px) {
+        @media screen and (max-width: 500px) {
           width: 100%;  
           padding: 0 15px;
           }
  
       }
 
-      @media screen and (max-width: 450px) {
+      @media screen and (max-width: 500px) {
         display: block; 
         }
     }
@@ -531,5 +521,174 @@
   background-color: map-get($colors, color-tertiary);
   &__container {
     grid-column: center-start / center-end;
+    margin: 40px 6vw;
+    &__title {
+      text-align: center;
+      h5 {
+        color: map-get($colors, collor-quinary);
+        font-size: map-get($font-sizes, font-size-regular);
+        font-weight: map-get($font-weights, font-weight-light)
+      }
+
+      h3 {
+        font-size: map-get($font-sizes, font-size-medium);
+        padding: 20px 0;
+      }
+    }
+
+    &__frame {
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-evenly;
+      &--image-frame {
+        padding: 30px;
+        background-color: map-get($colors, color-primary);
+        width: 30%;
+        img {
+          @include image-positioning;
+          height: 350px;  
+          width: 100%;        
+        }
+        h5 {
+          color: map-get($colors, collor-quinary);
+          font-size: map-get($font-sizes, font-size-small);
+          font-weight: map-get($font-weights, font-weight-light);
+          padding: 10px 0;
+        }
+
+        h4 {
+          font-size: map-get($font-sizes, font-size-regular);
+          font-weight: map-get($font-weights, font-weight-regular)
+        }
+      }
+      @media screen and (max-width: 900px) {
+        &{
+          flex-direction: column;
+          
+          &--image-frame {
+            width: 100%;
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+   
+    
+  }
+
+}
+
+.testimonials {
+  @extend%grid-column;
+  background: linear-gradient(0deg, rgba(210,208,204,0.7987570028011204) 0%, rgba(27,28,21,0.804359243697479) 0%),url("https://i.ibb.co/vBj175p/barber-1979440.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+ 
+  &__container {
+    grid-column: center-start / center-end;
+    text-align: center;
+    margin: 50px 30px;
+    
+
+    h2 {
+      font-size: map-get($font-sizes, font-size-medium);
+      font-weight: map-get($font-weights, font-weight-regular);
+      color: map-get($colors, color-primary); 
+    }
+
+    &__frame {
+      display: flex;
+      background-color: transparent;
+      justify-content: center;
+      margin-top: 30px;
+      &--inner {
+        width: 40%;
+        padding: 30px;
+        margin: 20px;
+        border: 1px solid white;
+        img {
+          width: 30px;
+          height: 30px;
+          margin: 20px 0;
+          filter: brightness(0) invert(1);
+        }
+
+        p {
+          font-family: "Arial";
+          line-height: 1.5;
+          font-size: map-get($font-sizes, font-size-small);
+          font-weight: map-get($font-weights, font-weight-light);
+          color: white;
+          text-align: left;
+          margin-bottom: 20px;
+        }
+
+        h5 {
+          text-align: left;
+          font-size: map-get($font-sizes, font-size-regular);
+          font-weight: map-get($font-weights, font-weight-regular);
+          color: map-get($colors, collor-quinary);
+        }
+      }
+
+      @media screen and (max-width: 650px) {
+        & {
+          flex-direction: column;
+          &--inner {
+            width: 90%;
+          }
+        }
+        
+      }
+    }    
+  }
+}
+
+.footer {
+
+  padding: 40px 30px 20px 30px;
+  background-color: map-get($colors, color-quaternary);
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__logo {
+      font-size: map-get($font-sizes, font-size-small);
+      color: map-get($colors, collor-quinary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;   
+      &--barber {
+          font-size: map-get($font-sizes, font-size-medium);
+          &::after,
+          &::before {
+            display: block;
+            content: '';
+            background-color: map-get($colors, collor-quinary);
+            height: 3px;
+                    
+               
+          }
+        }
+      }
+    &__icons {
+      margin-top: 40px;
+      display: flex;
+      width: 30px;
+      height: 30px;
+      justify-content: center;
+
+      img {
+        padding: 0 20px;
+        filter: brightness(0) invert(1); 
+        transition: filter 10s ease-in-out;
+        &:hover,
+        &:active {
+          filter: invert(70%) sepia(5%) saturate(5631%) hue-rotate(331deg) brightness(78%) contrast(65%);
+          cursor: pointer;
+          }
+        }
+    }   
   }
 }
