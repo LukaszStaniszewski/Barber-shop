@@ -22,6 +22,7 @@ i {
 a:link,
 a:visited {
   text-decoration: none;
+  color: white;
 }
 
 .testimonials, .barbers, .about, .gallery, .showcase, .header, .navbar {
@@ -37,8 +38,11 @@ a:visited {
 
 .navbar {
   background-color: #ffffff;
+}
+.navbar.open {
   position: fixed;
   z-index: 3;
+  width: 100%;
   opacity: 0.9;
 }
 .navbar__container {
@@ -116,6 +120,84 @@ a:visited {
 .navbar__container__hamburger.open span:nth-child(6) {
   left: calc(50% - 5px);
   top: 29px;
+}
+.navbar__dropdown {
+  opacity: 0.9;
+  top: 65px;
+  padding-top: 70px;
+  left: -100px;
+  width: 0px;
+  visibility: hidden;
+  position: absolute;
+  height: 100vh;
+  transform-origin: left;
+  transition-duration: 0.3s;
+  transition-property: width visibility;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navbar__dropdown__links {
+  font-size: calc(1.2rem + 0.35vw);
+  padding-top: 30px;
+}
+.navbar__dropdown__links a:hover,
+.navbar__dropdown__links a:active {
+  transform: rotateY(-90deg);
+}
+.navbar__dropdown__links a:link,
+.navbar__dropdown__links a:visited {
+  display: block;
+  padding: 10px;
+  margin: 15px;
+  text-align: center;
+  border-radius: 2px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.navbar__dropdown__links a:link::after,
+.navbar__dropdown__links a:visited::after {
+  content: attr(text);
+  background-color: #ae7b5b;
+  position: absolute;
+  padding: 10px;
+  transform: rotateY(90deg);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  left: 0;
+  right: 0;
+}
+.navbar__dropdown__logo {
+  margin-top: 100px;
+  font-size: calc(1.2rem + 0.35vw);
+  color: #ae7b5b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navbar__dropdown__logo--barber {
+  font-size: calc(1.5rem + 1.5vw);
+}
+.navbar__dropdown__logo--barber::after, .navbar__dropdown__logo--barber::before {
+  display: block;
+  content: "";
+  background-color: #ae7b5b;
+  height: 3px;
+}
+.navbar__dropdown.open {
+  visibility: visible;
+  left: 0;
+  width: 300px;
+  transform-origin: left;
+  transition: width 0.3s ease-in;
+}
+@media screen and (max-width: 600px) {
+  .navbar__dropdown.open {
+    width: 200px;
+  }
 }
 
 .header {
