@@ -75,6 +75,7 @@
 .navbar {
     @extend%grid-column;
     background-color: map-get($colors, color-primary);
+    overflow: hidden;
     &.open {
       position: fixed;
       z-index: 3;
@@ -179,8 +180,8 @@
       opacity: 0.9;
       top: 65px;
       padding-top: 70px;
-      left: -100px;
-      width: 00px;
+      left: -250px;
+      width: 300px;
       visibility: hidden;
       position: absolute;
       height: 100vh;
@@ -188,7 +189,7 @@
       transition-duration: 0.3s;
       transition-property: width visibility;
       background-color: #1a1a1a;
-      
+    
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -251,20 +252,21 @@
             }
         }
       }
+      &.open {
+        visibility: visible;
+        transform-origin: left;
+        transition: transform 0.3s ease-in;
+        transform:translateX(250px);
+        z-index: 7;
+      }
+      @media screen and (max-width: 600px) {
+          &.open {
+            width: 200px
+          }
+          
+      }
     }
-    &__dropdown.open {
-      visibility: visible;
-      left: 0;
-      width: 300px;
-      transform-origin: left;
-      transition: width 0.3s ease-in;
-    }
-    @media screen and (max-width: 600px) {
-        &__dropdown.open {
-          width: 200px
-        }
-        
-    }
+   
 }
 
 //####################################  HEADER SECTION ####################################//
