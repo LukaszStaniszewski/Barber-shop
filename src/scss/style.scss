@@ -1,792 +1,764 @@
 @use "./index" as *;
 
 %grid-column {
-    display: grid;
-    grid-template-columns:
+   display: grid;
+   grid-template-columns:
       [container-start] 1fr [center-start] repeat(
-        3, [col-start] minmax(min-content, 500px) [col-end]
+         3,
+         [col-start] minmax(min-content, 500px) [col-end]
       )
       [center-end] 1fr [container-end];
 
-      @media screen and (min-width: 2000px) {
-        display: grid;
-        grid-template-columns:
-          [container-start] 1fr [center-start] repeat(
-            3, [col-start] minmax(min-content, 650px) [col-end]
-          )
-          [center-end] 1fr [container-end];
-      }
+   @media screen and (min-width: 2000px) {
+      display: grid;
+      grid-template-columns:
+         [container-start] 1fr [center-start] repeat(
+            3,
+            [col-start] minmax(min-content, 650px) [col-end]
+         )
+         [center-end] 1fr [container-end];
+   }
 }
 
 @mixin image-positioning {
-  object-fit: cover;
-  object-position: center;
-  
+   object-fit: cover;
+   object-position: center;
 }
 
 @mixin button($color) {
-  background-color: map-get($colors, collor-quinary);
-                color: white;
-                padding: 15px 25px 15px 25px;
-                margin-top: 20px;
-                position: relative;
-                border: none;
-                cursor: pointer;
+   background-color: map-get($colors, collor-quinary);
+   color: white;
+   padding: 15px 25px 15px 25px;
+   margin-top: 20px;
+   position: relative;
+   border: none;
+   cursor: pointer;
 
-                &::before,
-                &::after {
-                    position: absolute;
-                    content: "";
-                    background-color: transparent;
-                    z-index: 2;
-                }
+   &::before,
+   &::after {
+      position: absolute;
+      content: "";
+      background-color: transparent;
+      z-index: 2;
+   }
 
-                &.hover::before,
-                &.hover::after {
-                    width: 10%; 
-                    height: 25%;
-                    transition: 0.35s;
-                }
+   &.hover::before,
+   &.hover::after {
+      width: 10%;
+      height: 25%;
+      transition: 0.35s;
+   }
 
-                &.hover::before {
-                    margin: -5px;
-                    top: 0; left: 0;
-                    border-left: 1px solid $color;
-                    border-top: 1px solid $color;
-                  }
+   &.hover::before {
+      margin: -5px;
+      top: 0;
+      left: 0;
+      border-left: 1px solid $color;
+      border-top: 1px solid $color;
+   }
 
-                  &.hover::after {
-                    bottom: 0; right: 0;
-                    border-right: 1px solid $color;
-                    border-bottom: 1px solid $color;
-                    margin: -5px;
-                  }
+   &.hover::after {
+      bottom: 0;
+      right: 0;
+      border-right: 1px solid $color;
+      border-bottom: 1px solid $color;
+      margin: -5px;
+   }
 
-                &.hover:hover::before,
-                &.hover:hover::after,
-                &.hover:active::before,
-                &.hover:active::after {
-                    width: 106%;
-                    height: 120%;
-                  }
+   &.hover:hover::before,
+   &.hover:hover::after,
+   &.hover:active::before,
+   &.hover:active::after {
+      width: 106%;
+      height: 120%;
+   }
 }
 
 //####################################  NAVBAR SECTION ####################################//
 .navbar {
-    @extend%grid-column;
-    background-color: map-get($colors, color-primary);
-    overflow: hidden;
-    &.open {
-      position: fixed;
-      z-index: 3;
-      width: 100%;
+   @extend%grid-column;
+   background-color: map-get($colors, color-primary);
+   position: sticky;
+   top: 0;
+   z-index: 99;
+   &.open {
       opacity: 0.9;
-    }
-    &__container {
-        grid-column: center-start / center-end;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 10px 15px;
+   }
+   &__container {
+      grid-column: center-start / center-end;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 15px;
 
-        &--name{
-            font-size: map-get($font-sizes, font-size-regular);
-            vertical-align: middle;
-        }
+      &--name {
+         font-size: map-get($font-sizes, font-size-regular);
+         vertical-align: middle;
+      }
 
-        &__hamburger {
-            width: 60px;
-            height: 45px;
-            position: relative;
+      &__hamburger {
+         width: 60px;
+         height: 45px;
+         position: relative;
+         transform: rotate(0deg);
+         transition: 0.5s ease-in-out;
+         cursor: pointer;
+
+         span {
+            display: block;
+            position: absolute;
+            height: 6px;
+            width: 50%;
+            background: map-get($colors, color-quaternary);
+            opacity: 1;
             transform: rotate(0deg);
-            transition: .5s ease-in-out;
-            cursor: pointer;
-           
-            span {
-                display: block;
-                position: absolute;
-                height: 6px;
-                width: 50%;
-                background: map-get($colors, color-quaternary);
-                opacity: 1;
-                transform: rotate(0deg);
-                transition: .25s ease-in-out;
-            }
+            transition: 0.25s ease-in-out;
+         }
 
-            span:nth-child(even) {
-                left: 50%;
-                border-radius: 0 9px 9px 0;
-              }
-              
-              span:nth-child(odd) {
-                left:0px;
-                border-radius: 9px 0 0 9px;
-              }
-              
-              span:nth-child(1), span:nth-child(2) {
-                top: 0px;
-              }
-              
-              span:nth-child(3), span:nth-child(4) {
-                top: 18px;
-              }
-              
-              span:nth-child(5),  span:nth-child(6) {
-                top: 36px;
-              }
-              
-              &.open span:nth-child(1), &.open span:nth-child(6) {
-                transform: rotate(45deg);
-              }
-              
-              &.open span:nth-child(2), &.open span:nth-child(5) {
-                transform: rotate(-45deg);
-              }
-              
-              &.open span:nth-child(1) {
-                left: 5px;
-                top: 7px;
-              }
-              
-              &.open span:nth-child(2) {
-                left: calc(50% - 5px);
-                top: 7px;
-              }
-              
-              &.open span:nth-child(3) {
-                left: -50%;
-                opacity: 0;
-              }
-              
-              &.open span:nth-child(4) {
-                left: 100%;
-                opacity: 0;
-              }
-              
-              &.open span:nth-child(5) {
-                left: 5px;
-                top: 29px;
-              }
-              
-              &.open span:nth-child(6) {
-                left: calc(50% - 5px);
-                top: 29px;
-              }
-        }
-    }
-    
+         span:nth-child(even) {
+            left: 50%;
+            border-radius: 0 9px 9px 0;
+         }
 
-    &__dropdown {
+         span:nth-child(odd) {
+            left: 0px;
+            border-radius: 9px 0 0 9px;
+         }
+
+         span:nth-child(1),
+         span:nth-child(2) {
+            top: 0px;
+         }
+
+         span:nth-child(3),
+         span:nth-child(4) {
+            top: 18px;
+         }
+
+         span:nth-child(5),
+         span:nth-child(6) {
+            top: 36px;
+         }
+
+         &.open span:nth-child(1),
+         &.open span:nth-child(6) {
+            transform: rotate(45deg);
+         }
+
+         &.open span:nth-child(2),
+         &.open span:nth-child(5) {
+            transform: rotate(-45deg);
+         }
+
+         &.open span:nth-child(1) {
+            left: 5px;
+            top: 7px;
+         }
+
+         &.open span:nth-child(2) {
+            left: calc(50% - 5px);
+            top: 7px;
+         }
+
+         &.open span:nth-child(3) {
+            left: -50%;
+            opacity: 0;
+         }
+
+         &.open span:nth-child(4) {
+            left: 100%;
+            opacity: 0;
+         }
+
+         &.open span:nth-child(5) {
+            left: 5px;
+            top: 29px;
+         }
+
+         &.open span:nth-child(6) {
+            left: calc(50% - 5px);
+            top: 29px;
+         }
+      }
+   }
+
+   &__dropdown {
       opacity: 0.9;
       top: 65px;
       padding-top: 70px;
-      left: -250px;
+      transform: scaleX(0);
       width: 300px;
       visibility: hidden;
       position: absolute;
       height: 100vh;
       transform-origin: left;
-      transition-duration: 0.3s;
-      transition-property: width visibility;
+      transition: all 0.3s ease-in-out;
       background-color: #1a1a1a;
-    
+
       display: flex;
       flex-direction: column;
       align-items: center;
       &__links {
-        font-size: map-get($font-sizes, font-size-small);
-        padding-top: 30px;
+         font-size: map-get($font-sizes, font-size-small);
+         padding-top: 30px;
 
-        a:hover,
-        a:active {
-            transform: rotateY(-90deg);         
-          }
-        a:link,
-        a:visited {
-          display: block;
-          padding: 10px;
-          margin: 15px;
-          text-align: center;
-          border-radius: 2px;
-          position: relative;
-          transform-style: preserve-3d;
-          transform-origin: left;
-          transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-          
-
-          
-          &::after {
-            content: attr(text);
-            background-color: map-get($colors, collor-quinary);
-            position: absolute;
+         a:hover,
+         a:active {
+            transform: rotateY(-90deg);
+         }
+         a:link,
+         a:visited {
+            display: block;
             padding: 10px;
-            transform: rotateY(90deg);
+            margin: 15px;
+            text-align: center;
+            border-radius: 2px;
+            position: relative;
+            transform-style: preserve-3d;
             transform-origin: left;
-            transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-            left: 0;
-            right: 0;
-          }
-         
-         
-        }
+            transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
+            &::after {
+               content: attr(text);
+               background-color: map-get($colors, collor-quinary);
+               position: absolute;
+               padding: 10px;
+               transform: rotateY(90deg);
+               transform-origin: left;
+               transition: transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+               left: 0;
+               right: 0;
+            }
+         }
       }
 
       &__logo {
-        margin-top: 100px;
-        font-size: map-get($font-sizes, font-size-small);
-        color: map-get($colors, collor-quinary);
-        display: flex;
-        flex-direction: column;
-        align-items: center;   
-        &--barber {
+         margin-top: 100px;
+         font-size: map-get($font-sizes, font-size-small);
+         color: map-get($colors, collor-quinary);
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         &--barber {
             font-size: map-get($font-sizes, font-size-medium);
             &::after,
             &::before {
-              display: block;
-              content: '';
-              background-color: map-get($colors, collor-quinary);
-              height: 3px;
-                      
-                 
+               display: block;
+               content: "";
+               background-color: map-get($colors, collor-quinary);
+               height: 3px;
             }
-        }
+         }
       }
       &.open {
-        visibility: visible;
-        transform-origin: left;
-        transition: transform 0.3s ease-in;
-        transform:translateX(250px);
-        z-index: 7;
+         visibility: visible;
+         transform: scaleX(1);
+         z-index: 99;
       }
       @media screen and (max-width: 600px) {
-          &.open {
-            width: 200px
-          }
-          
+         &.open {
+            width: 200px;
+         }
       }
-    }
-   
+   }
 }
 
 //####################################  HEADER SECTION ####################################//
 .header {
-    @extend%grid-column;
-    background: linear-gradient(0deg, rgba(210,208,204,0.7987570028011204) 0%, rgba(27,28,21,0.804359243697479) 0%),url("https://i.ibb.co/tB0WqCV/barber-shop-g9edce81db-1920.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 700px;
-    &__content{
-        grid-column: center-start / center-end;
-        color: white;
-        height: inherit;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding-bottom: 20px;
-        &__right-side {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            margin-right: 15px;
-           
-            &--text-one {
-                font-size: map-get($font-sizes, font-size-regular)
-            }
+   @extend%grid-column;
+   background: linear-gradient(
+         0deg,
+         rgba(210, 208, 204, 0.7987570028011204) 0%,
+         rgba(27, 28, 21, 0.804359243697479) 0%
+      ),
+      url("https://i.ibb.co/tB0WqCV/barber-shop-g9edce81db-1920.jpg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   height: 700px;
+   &__content {
+      grid-column: center-start / center-end;
+      color: white;
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 20px;
+      &__right-side {
+         display: flex;
+         flex-direction: column;
+         align-items: flex-end;
+         margin-right: 15px;
 
-            &--welcome-text {
-                font-size: map-get($font-sizes, font-size-large);
-                text-align: right;
-            }
-            &--button {
-                @include button(#ffffff);
-                
-            }
-        }
-        &__left-side {
-            display: flex;
-            flex-direction: column;
-            justify-items: flex-end;
-            font-size: map-get($font-sizes, font-size-small);
+         &--text-one {
+            font-size: map-get($font-sizes, font-size-regular);
+         }
+
+         &--welcome-text {
+            font-size: map-get($font-sizes, font-size-large);
+            text-align: right;
+         }
+         &--button {
+            @include button(#ffffff);
+         }
+      }
+      &__left-side {
+         display: flex;
+         flex-direction: column;
+         justify-items: flex-end;
+         font-size: map-get($font-sizes, font-size-small);
+         width: min-content;
+         text-align: center;
+         margin-left: 15px;
+
+         &--barber {
+            font-size: map-get($font-sizes, font-size-medium);
             width: min-content;
-            text-align: center;
-            margin-left: 15px;
-
-            &--barber {
-                font-size: map-get($font-sizes, font-size-medium);
-                width: min-content;
-                &::after,
-                &::before {
-                   
-                    display: block;
-                    content: '';
-                    background-color: white;
-                    width: 100%;
-                    height: 3px
-                    
-                }
+            &::after,
+            &::before {
+               display: block;
+               content: "";
+               background-color: white;
+               width: 100%;
+               height: 3px;
             }
-        }
-        
-       
-    }
-    
-
+         }
+      }
+   }
 }
 
 //####################################  SHOWCASE SECTION ####################################//
 .showcase {
-    @extend%grid-column;
-    background-color: map-get($colors, color-secondary);
-    
-    &__content {
-        grid-column: center-start / center-end;
-        display: flex;
-        padding: 50px 30px;
-        justify-content: center;
-        min-height: 500px;
-        
-        &__left-side {
-          margin-top: 30px;
-          width: 40%;
-          h5 {
+   @extend%grid-column;
+   background-color: map-get($colors, color-secondary);
+
+   &__content {
+      grid-column: center-start / center-end;
+      display: flex;
+      padding: 50px 30px;
+      justify-content: center;
+      min-height: 500px;
+
+      &__left-side {
+         margin-top: 30px;
+         width: 40%;
+         h5 {
             color: map-get($colors, collor-quinary);
             font-size: map-get($font-sizes, font-size-regular);
-            font-weight: map-get($font-weights, font-weight-light)
-          }
-          
-          h3 {
+            font-weight: map-get($font-weights, font-weight-light);
+         }
+
+         h3 {
             font-size: map-get($font-sizes, font-size-medium);
             margin-top: 20px;
-          }
+         }
 
-          p {
+         p {
             font-size: map-get($font-sizes, font-size-small);
             word-wrap: break-word;
             margin: 30px 0px;
             line-height: 1.6;
-  
-          }
+         }
 
-          div {
+         div {
             border-bottom: 1px solid map-get($colors, collor-quinary);
             width: 20%;
-            padding-top: 20px
-            
-          }
-          &--button {
+            padding-top: 20px;
+         }
+         &--button {
             @include button(#1a1a1a);
-          }
-        }
-        &__image {
-          padding: 0 30px;
-          width: 40%;
-          img {
+         }
+      }
+      &__image {
+         padding: 0 30px;
+         width: 40%;
+         img {
             width: 100%;
             height: 100%;
             min-width: 35%;
             filter: grayscale(100%);
             object-position: center;
             object-fit: cover;
-            
-          }    
-        }
+         }
+      }
 
-        &__right-side {
-          margin-top: 30px;
-   
+      &__right-side {
+         margin-top: 30px;
 
-          h5 {
+         h5 {
             color: map-get($colors, collor-quinary);
             font-size: map-get($font-sizes, font-size-regular);
             font-weight: map-get($font-weights, font-weight-light);
-            
-          }
-          
-          h3 {
+         }
+
+         h3 {
             font-size: map-get($font-sizes, font-size-medium);
             margin-top: 20px;
-          }
+         }
 
-          p {
+         p {
             padding-top: 20px;
             font-size: map-get($font-sizes, font-size-small);
             line-height: 1.6;
+         }
 
-          }
-
-          div {
+         div {
             border-bottom: 1px solid map-get($colors, collor-quinary);
             width: 40%;
             margin: 20px 0px;
-            
-          }
-        }
+         }
+      }
 
-        @media screen and (max-width: 920px) {
-          & {
+      @media screen and (max-width: 920px) {
+         & {
             display: grid;
             grid-template-rows: repeat(2, minmax(min-content, 500px));
-            
+
             &__left-side {
-              grid-row: 1 / 2;
-              width: auto;
-              padding-right: 15px;
+               grid-row: 1 / 2;
+               width: auto;
+               padding-right: 15px;
             }
 
             &__right-side {
-              grid-row: 1 / 2;
-              padding-left: 15px;
+               grid-row: 1 / 2;
+               padding-left: 15px;
             }
 
             &__image {
-            justify-items: center;
-            grid-row: 2 / 3;
-            grid-column: 1 / 3;
-            padding-top: 20px;
-            width: 100%; 
-            
-          
+               justify-items: center;
+               grid-row: 2 / 3;
+               grid-column: 1 / 3;
+               padding-top: 20px;
+               width: 100%;
             }
-            
-          }
-        }
+         }
+      }
 
-        @media screen and (max-width: 500px) {
-          &{
+      @media screen and (max-width: 500px) {
+         & {
             display: grid;
             grid-template-rows: repeat(3, minmax(min-content, max-content));
-            
+
             &__left-side {
-              grid-row: 1 / 2;
-          
+               grid-row: 1 / 2;
             }
 
             &__right-side {
-              padding: 30px 0;
-              grid-row: 2 / 3;
-              height: max-content;
-              text-align: center;
+               padding: 30px 0;
+               grid-row: 2 / 3;
+               height: max-content;
+               text-align: center;
 
-              div {
-                margin-left: 30%;
-              }
-              
+               div {
+                  margin-left: 30%;
+               }
             }
 
             &__image {
-            justify-items: center;
-            grid-row: 3 / 4;
-          
-     
-            width: 100%; 
-            
-          
+               justify-items: center;
+               grid-row: 3 / 4;
+
+               width: 100%;
             }
-
-          }
-        }
-    }
-   
-
+         }
+      }
+   }
 }
 
 //####################################  GALLERY SECTION ####################################//
 .gallery {
-  @extend%grid-column;
+   @extend%grid-column;
 
-  &__container {
-    margin: 50px 0;
-    grid-column: center-start / center-end;
-    &--title {
-      text-align: center;
-      margin-bottom: 30px;
-      h5 {
-        color: map-get($colors,collor-quinary);
-        font-size: map-get($font-sizes, font-size-regular);
-        font-weight: map-get($font-weights, font-weight-light);
+   &__container {
+      margin: 50px 0;
+      grid-column: center-start / center-end;
+      &--title {
+         text-align: center;
+         margin-bottom: 30px;
+         h5 {
+            color: map-get($colors, collor-quinary);
+            font-size: map-get($font-sizes, font-size-regular);
+            font-weight: map-get($font-weights, font-weight-light);
+         }
+
+         h2 {
+            font-size: map-get($font-sizes, font-size-medium);
+            font-weight: map-get($font-weights, font-weight-bold);
+         }
       }
+      &__pictures {
+         display: flex;
+         justify-content: space-evenly;
 
-      h2 {
-        font-size: map-get($font-sizes, font-size-medium);
-        font-weight: map-get($font-weights, font-weight-bold);
+         &--row-one,
+         &--row-two,
+         &--row-three {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 30%;
+         }
+
+         .picture-one,
+         .picture-two,
+         .picture-five,
+         .picture-six {
+            @include image-positioning;
+            padding-bottom: 10px;
+            max-height: 350px;
+            width: 100%;
+         }
+
+         .picture-three,
+         .picture-four {
+            @include image-positioning;
+            padding-bottom: 10px;
+            max-height: 500px;
+            width: 100%;
+         }
       }
-
-    }
-    &__pictures {
-      display: flex;
-      justify-content: space-evenly;
-
-      &--row-one, &--row-two, &--row-three {
-        display: flex;
-        align-items: center;    
-        flex-direction: column;    
-        width: 30%;
-      }
-
-      .picture-one, .picture-two, .picture-five, .picture-six {
-        @include image-positioning ;     
-        padding-bottom: 10px;
-        max-height: 350px;
-        width: 100%;
-
-      }
-
-      .picture-three, .picture-four {
-        @include image-positioning ;   
-        padding-bottom: 10px;
-        max-height: 500px;
-        width: 100%;
-
-      }
-     
-    }
-
-  }
+   }
 }
 
 //####################################  ABOUT SECTION ####################################//
 .about {
-  @extend%grid-column;
-  background-color: map-get($colors, color-secondary);
-  &__container {
-    grid-column: center-start / center-end;
-    padding: 70px 30px 30px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    &__title {
-      text-align: center;
-      font-family: 'Arial';
-      h5 {
-        color: map-get($colors, collor-quinary);
-        font-size: map-get($font-sizes, font-size-regular);
-        font-weight: map-get($font-weights, font-weight-regular)
+   @extend%grid-column;
+   background-color: map-get($colors, color-secondary);
+   &__container {
+      grid-column: center-start / center-end;
+      padding: 70px 30px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__title {
+         text-align: center;
+         font-family: "Arial";
+         h5 {
+            color: map-get($colors, collor-quinary);
+            font-size: map-get($font-sizes, font-size-regular);
+            font-weight: map-get($font-weights, font-weight-regular);
+         }
+
+         h2 {
+            padding-top: 20px;
+            font-size: map-get($font-sizes, font-size-medium);
+         }
       }
 
-      h2 {
-        padding-top: 20px;
-        font-size: map-get($font-sizes, font-size-medium);
+      &__content {
+         padding-top: 50px;
+         display: flex;
+         justify-content: center;
+         line-height: 1.6;
+         font-weight: map-get($font-weights, font-weight-light);
+         &--page-one {
+            font-size: map-get($font-sizes, font-size-small);
+            width: 50%;
+            padding-right: 15px;
+
+            @media screen and (max-width: 500px) {
+               width: 100%;
+               padding: 0 15px;
+            }
+         }
+
+         &--page-two {
+            font-size: map-get($font-sizes, font-size-small);
+            width: 50%;
+            padding-left: 15px;
+
+            @media screen and (max-width: 500px) {
+               width: 100%;
+               padding: 0 15px;
+            }
+         }
+
+         @media screen and (max-width: 500px) {
+            display: block;
+         }
       }
-    }
-
-    &__content {
-    padding-top: 50px;
-    display: flex;
-    justify-content: center;
-    line-height: 1.6;
-    font-weight: map-get($font-weights, font-weight-light);
-      &--page-one {
-        font-size: map-get($font-sizes, font-size-small);
-        width: 50%;
-        padding-right: 15px;
-
-        @media screen and (max-width:500px) {
-        width: 100%; 
-        padding: 0 15px; 
-        }
+      &__button {
+         @include button(#1a1a1a);
       }
-
-      &--page-two {
-        font-size: map-get($font-sizes, font-size-small);
-        width: 50%;
-        padding-left: 15px;
-
-        @media screen and (max-width: 500px) {
-          width: 100%;  
-          padding: 0 15px;
-          }
- 
-      }
-
-      @media screen and (max-width: 500px) {
-        display: block; 
-        }
-    }
-    &__button {
-      @include button(#1a1a1a);
-    }
-  }
+   }
 }
 
 //####################################  BARBERS SECTION ####################################//
 .barbers {
-  @extend%grid-column;
-  background-color: map-get($colors, color-tertiary);
-  &__container {
-    grid-column: center-start / center-end;
-    margin: 40px 6vw;
-    &__title {
-      text-align: center;
-      h5 {
-        color: map-get($colors, collor-quinary);
-        font-size: map-get($font-sizes, font-size-regular);
-        font-weight: map-get($font-weights, font-weight-light)
+   @extend%grid-column;
+   background-color: map-get($colors, color-tertiary);
+   &__container {
+      grid-column: center-start / center-end;
+      margin: 40px 6vw;
+      &__title {
+         text-align: center;
+         h5 {
+            color: map-get($colors, collor-quinary);
+            font-size: map-get($font-sizes, font-size-regular);
+            font-weight: map-get($font-weights, font-weight-light);
+         }
+
+         h3 {
+            font-size: map-get($font-sizes, font-size-medium);
+            padding: 20px 0;
+         }
       }
 
-      h3 {
-        font-size: map-get($font-sizes, font-size-medium);
-        padding: 20px 0;
-      }
-    }
+      &__frame {
+         padding-top: 30px;
+         display: flex;
+         justify-content: space-evenly;
+         &--image-frame {
+            padding: 30px;
+            background-color: map-get($colors, color-primary);
+            width: 30%;
+            img {
+               @include image-positioning;
+               height: 350px;
+               width: 100%;
+            }
+            h5 {
+               color: map-get($colors, collor-quinary);
+               font-size: map-get($font-sizes, font-size-small);
+               font-weight: map-get($font-weights, font-weight-light);
+               padding: 10px 0;
+            }
 
-    &__frame {
-      padding-top: 30px;
-      display: flex;
-      justify-content: space-evenly;
-      &--image-frame {
-        padding: 30px;
-        background-color: map-get($colors, color-primary);
-        width: 30%;
-        img {
-          @include image-positioning;
-          height: 350px;  
-          width: 100%;        
-        }
-        h5 {
-          color: map-get($colors, collor-quinary);
-          font-size: map-get($font-sizes, font-size-small);
-          font-weight: map-get($font-weights, font-weight-light);
-          padding: 10px 0;
-        }
+            h4 {
+               font-size: map-get($font-sizes, font-size-regular);
+               font-weight: map-get($font-weights, font-weight-regular);
+            }
+         }
+         @media screen and (max-width: 900px) {
+            & {
+               flex-direction: column;
 
-        h4 {
-          font-size: map-get($font-sizes, font-size-regular);
-          font-weight: map-get($font-weights, font-weight-regular)
-        }
+               &--image-frame {
+                  width: 100%;
+                  margin-top: 30px;
+               }
+            }
+         }
       }
-      @media screen and (max-width: 900px) {
-        &{
-          flex-direction: column;
-          
-          &--image-frame {
-            width: 100%;
-            margin-top: 30px;
-          }
-        }
-      }
-    }
-   
-    
-  }
-
+   }
 }
 
 //####################################  TESTIMONIALS SECTION ####################################//
 .testimonials {
-  @extend%grid-column;
-  background: linear-gradient(0deg, rgba(210,208,204,0.7987570028011204) 0%, rgba(27,28,21,0.804359243697479) 0%),url("https://i.ibb.co/vBj175p/barber-1979440.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
- 
-  &__container {
-    grid-column: center-start / center-end;
-    text-align: center;
-    margin: 50px 30px;
-    
+   @extend%grid-column;
+   background: linear-gradient(
+         0deg,
+         rgba(210, 208, 204, 0.7987570028011204) 0%,
+         rgba(27, 28, 21, 0.804359243697479) 0%
+      ),
+      url("https://i.ibb.co/vBj175p/barber-1979440.jpg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
 
-    h2 {
-      font-size: map-get($font-sizes, font-size-medium);
-      font-weight: map-get($font-weights, font-weight-regular);
-      color: map-get($colors, color-primary); 
-    }
+   &__container {
+      grid-column: center-start / center-end;
+      text-align: center;
+      margin: 50px 30px;
 
-    &__frame {
-      display: flex;
-      background-color: transparent;
-      justify-content: center;
-      margin-top: 30px;
-      &--inner {
-        width: 40%;
-        padding: 30px;
-        margin: 20px;
-        border: 1px solid white;
-        img {
-          width: 30px;
-          height: 30px;
-          margin: 20px 0;
-          filter: brightness(0) invert(1);
-        }
-
-        p {
-          font-family: "Arial";
-          line-height: 1.5;
-          font-size: map-get($font-sizes, font-size-small);
-          font-weight: map-get($font-weights, font-weight-light);
-          color: white;
-          text-align: left;
-          margin-bottom: 20px;
-        }
-
-        h5 {
-          text-align: left;
-          font-size: map-get($font-sizes, font-size-regular);
-          font-weight: map-get($font-weights, font-weight-regular);
-          color: map-get($colors, collor-quinary);
-        }
+      h2 {
+         font-size: map-get($font-sizes, font-size-medium);
+         font-weight: map-get($font-weights, font-weight-regular);
+         color: map-get($colors, color-primary);
       }
 
-      @media screen and (max-width: 650px) {
-        & {
-          flex-direction: column;
-          &--inner {
-            width: 90%;
-          }
-        }
-        
+      &__frame {
+         display: flex;
+         background-color: transparent;
+         justify-content: center;
+         margin-top: 30px;
+         &--inner {
+            width: 40%;
+            padding: 30px;
+            margin: 20px;
+            border: 1px solid white;
+            img {
+               width: 30px;
+               height: 30px;
+               margin: 20px 0;
+               filter: brightness(0) invert(1);
+            }
+
+            p {
+               font-family: "Arial";
+               line-height: 1.5;
+               font-size: map-get($font-sizes, font-size-small);
+               font-weight: map-get($font-weights, font-weight-light);
+               color: white;
+               text-align: left;
+               margin-bottom: 20px;
+            }
+
+            h5 {
+               text-align: left;
+               font-size: map-get($font-sizes, font-size-regular);
+               font-weight: map-get($font-weights, font-weight-regular);
+               color: map-get($colors, collor-quinary);
+            }
+         }
+
+         @media screen and (max-width: 650px) {
+            & {
+               flex-direction: column;
+               &--inner {
+                  width: 90%;
+               }
+            }
+         }
       }
-    }    
-  }
+   }
 }
 
 //####################################  FOOTER SECTION ####################################//
 .footer {
-
-  padding: 40px 30px 20px 30px;
-  background-color: map-get($colors, color-quaternary);
-  &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    &__logo {
-      font-size: map-get($font-sizes, font-size-small);
-      color: map-get($colors, collor-quinary);
+   padding: 40px 30px 20px 30px;
+   background-color: map-get($colors, color-quaternary);
+   &__container {
       display: flex;
       flex-direction: column;
-      align-items: center;   
-      &--barber {
-          font-size: map-get($font-sizes, font-size-medium);
-          &::after,
-          &::before {
-            display: block;
-            content: '';
-            background-color: map-get($colors, collor-quinary);
-            height: 3px;
-                    
-               
-          }
-        }
+      align-items: center;
+      &__logo {
+         font-size: map-get($font-sizes, font-size-small);
+         color: map-get($colors, collor-quinary);
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         &--barber {
+            font-size: map-get($font-sizes, font-size-medium);
+            &::after,
+            &::before {
+               display: block;
+               content: "";
+               background-color: map-get($colors, collor-quinary);
+               height: 3px;
+            }
+         }
       }
-    &__icons {
-      margin-top: 40px;
-      display: flex;
-      width: 30px;
-      height: 30px;
-      justify-content: center;
+      &__icons {
+         margin-top: 40px;
+         display: flex;
+         width: 30px;
+         height: 30px;
+         justify-content: center;
 
-      img {
-        padding: 0 20px;
-        filter: brightness(0) invert(1); 
-        transition: filter 10s ease-in-out;
-        &:hover,
-        &:active {
-          filter: invert(70%) sepia(5%) saturate(5631%) hue-rotate(331deg) brightness(78%) contrast(65%);
-          cursor: pointer;
-          }
-        }
-    }   
-  }
+         img {
+            padding: 0 20px;
+            filter: brightness(0) invert(1);
+            transition: filter 10s ease-in-out;
+            &:hover,
+            &:active {
+               filter: invert(70%) sepia(5%) saturate(5631%) hue-rotate(331deg)
+                  brightness(78%) contrast(65%);
+               cursor: pointer;
+            }
+         }
+      }
+   }
 }
