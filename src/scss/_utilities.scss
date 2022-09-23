@@ -1,18 +1,19 @@
 :root {
-    font-size: 10px;
+   font-size: 10px;
+   scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Merriweather', serif;
-    box-sizing: border-box;
+   font-family: "Merriweather", serif;
+   box-sizing: border-box;
 }
 
 i {
-    list-style: none;
-  }
+   list-style: none;
+}
 
-  a:link,
-  a:visited {
-      text-decoration: none;
-      color: white;
-  }
+a:link,
+a:visited {
+   text-decoration: none;
+   color: white;
+}
